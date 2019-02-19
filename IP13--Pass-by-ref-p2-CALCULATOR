@@ -1,0 +1,139 @@
+/******************************************************************************
+
+filename:           ip13 - inClassProgramming
+author:             Max T.  Max T.  Max T.  Max T.  Max T.  Max T.  Max T.
+navigators:         Cyrus Cravens, Robert Curtin
+date:               2/19/19  2/19/19  2/19/19  2/19/19  2/19/19  2/19/19
+
+goal:               Write a program to work as a calculator. The user should be asked to input an operation (+ - * / %) and
+                    two integer values. There should be a switch structure that handles calling different functions, one for
+                    each of the operations. Be sure to include data validation in the operation input function.
+*******************************************************************************/
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+//prototypes
+void intro();                  // title of the program & brief description of what it will do
+void getOp(char&);               // asks the user for operation, validating input before return
+void getNum(int&, int&);              // asks the user for an integer value
+void opFuncs(char, int, int, int&);             // contains the switch structure to process operations
+void add(int, int, int&);                  // computes sum; called from switch
+void subtr(int, int, int&);                    // computes difference; called from switch
+void multiply(int, int, int&);                 // computes product; called from switch
+void divide(int, int, int&);                    // computes quotient; called from switch
+                                                                    // NOTE: If 0 is in num2, the function should call the getNum( )
+                                                                    // function repeatedly until a non-zero value is entered
+void modulu(int num1, int num2, int& ans);                       // computes remainder; called from switch
+                                                                    // NOTE: If 0 is in num2, the function should call the getNum( )
+                                                                    // function repeatedly until a non-zero value is entered
+void showAnswer(char op, int num1, int num2, int ans);           // displays equation
+//end of prototypes
+
+//main function
+int main(){
+    int num1, num2, ans;
+    char op;
+    
+    intro();
+    getOp(op);
+    getNum(num1, num2);
+    opFuncs(op, num1, num2, ans);
+    showAnswer(op, num1, num2, ans);
+    
+    return 0;
+}
+
+//functions all below V
+
+
+void intro(){
+    cout << "****CALCULATOR****\n";
+    cout << "This program will ask you to enter an operator, then 2 integers to calculate it with.\n";
+}             
+
+void getOp(char& op){
+    cout << "Plese enter an operator. (+ - * / modulus): ";
+    do{
+        cin >> op;
+        
+    }while(op != '+' && op != '-' && op != '*' && op != '/' && op != '%');
+
+return;
+}   
+
+void getNum(int& num1, int& num2){
+    cout << "Please enter two numbers: ";
+    cin >> num1;
+    cin >> num2;
+return;
+}
+
+void opFuncs(char op, int num1, int num2, int& ans){
+    
+    switch(op)
+    {
+        case '+':
+            add(num1, num2, ans);
+            break;
+
+        case '-':
+            subtr(num1, num2, ans);
+            break;
+
+        case '*':
+            multiply(num1, num2, ans);
+            break;
+
+        case '/':
+            divide(num1, num2, ans);
+            break;
+            
+        case '%':
+            modulu(num1, num2, ans);
+            break;
+
+        default:
+            // if wrong opertor is selected, gives error
+            cout << "Invalid input, that is not a valid opertor.";
+            break;
+} 
+}
+
+void add(int num1, int num2, int& ans){
+    ans = num1+num2;
+        
+    return;
+}                
+
+void subtr(int num1, int num2, int& ans){
+    ans = num1-num2;
+        
+    return;
+}                  
+
+void multiply(int num1, int num2, int& ans){
+    ans = num1*num2; 
+    
+    return;
+}                
+
+void divide(int num1, int num2, int& ans){
+    ans = num1/num2;
+    
+    return;
+}                   
+
+void modulu(int num1, int num2, int& ans){
+    ans = num1%num2;
+        
+    return;
+}   
+
+void showAnswer(char op, int num1, int num2, int ans){
+    cout << num1 << op << num2 << "=" << ans;
+    return;
+}
+
+
